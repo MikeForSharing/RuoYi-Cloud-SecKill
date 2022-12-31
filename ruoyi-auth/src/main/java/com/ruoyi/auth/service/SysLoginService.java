@@ -1,5 +1,8 @@
 package com.ruoyi.auth.service;
 
+import com.alibaba.fastjson.JSON;
+import com.ruoyi.auth.enums.LoginRedisKey;
+import com.ruoyi.common.redis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.core.constant.Constants;
@@ -13,6 +16,8 @@ import com.ruoyi.common.security.utils.SecurityUtils;
 import com.ruoyi.system.api.RemoteUserService;
 import com.ruoyi.system.api.domain.SysUser;
 import com.ruoyi.system.api.model.LoginUser;
+
+import java.util.Date;
 
 /**
  * 登录校验方法
@@ -30,6 +35,9 @@ public class SysLoginService
 
     @Autowired
     private SysRecordLogService recordLogService;
+
+    @Autowired
+    private RedisService redisService;
 
     /**
      * 登录
@@ -58,7 +66,30 @@ public class SysLoginService
             throw new ServiceException("用户名不在指定范围");
         }
         // 查询用户信息
-        R<LoginUser> userResult = remoteUserService.getUserInfo(username, SecurityConstants.INNER);
+
+
+
+        // 先从redis中查，查不到在调远程remoteUserService接口
+        String loginUserHashKey = LoginRedisKey.USERLOGIN_HASH.getRealKey("");
+        String zSetKey = LoginRedisKey.USER_ZSET.getRealKey("");
+        String objStr = redisService.getCacheMapValue(loginUserHashKey, username);
+        R<LoginUser> userResult = new R<>();
+        if (StringUtils.isEmpty(objStr)){
+             // 如果redis中没有，则调远程remoteUserService接口，从数据库中查
+            userResult = remoteUserService.getUserInfo(username, SecurityConstants.INNER);
+             // 将用户登录信息存入redis
+             if (userResult != null){
+                 redisService.setCacheMapValue(loginUserHashKey, username, JSON.toJSONString(userResult.getData()));
+             }
+        }else {
+            //redis中有这个key
+            userResult.setData(JSON.parseObject(objStr,LoginUser.class));
+            userResult.setCode(R.SUCCESS);
+        }
+        redisService.setCacheZSet(zSetKey, username, new Date().getTime());
+
+
+
 
         if (R.FAIL == userResult.getCode())
         {
