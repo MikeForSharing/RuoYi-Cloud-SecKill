@@ -78,10 +78,12 @@
             <artifactId>ruoyi-common-swagger</artifactId>
         </dependency>
 
-        <!-- RuoYi Api System -->
+
+
+        <!-- RuoYi Modules Rabbit-->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-api-system</artifactId>
+            <artifactId>ruoyi-modules-rabbit</artifactId>
         </dependency>
 
     </dependencies>
