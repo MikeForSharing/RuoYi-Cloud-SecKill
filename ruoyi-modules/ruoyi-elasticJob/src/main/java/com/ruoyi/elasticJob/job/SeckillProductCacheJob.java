@@ -4,6 +4,7 @@ package com.ruoyi.elasticJob.job;
 import com.alibaba.fastjson.JSON;
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
+import com.ruoyi.common.core.constant.SecurityConstants;
 import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.redis.service.RedisService;
 import com.ruoyi.elasticJob.enums.JobRedisKey;
@@ -37,7 +38,7 @@ public class SeckillProductCacheJob implements SimpleJob {
     public void execute(ShardingContext shardingContext) {
         String time = shardingContext.getShardingParameter();
         System.out.println("执行定时任务（秒杀商品列表信息保存至Redis）");
-        R<List<SeckillProductVo>> result = remoteSeckillProductService.queryByTimeForJob(Integer.parseInt(time));
+        R<List<SeckillProductVo>> result = remoteSeckillProductService.queryByTimeForJob(Integer.parseInt(time), SecurityConstants.INNER);
         if(result==null||result.hasError()) {
             System.out.println("定时任务执行异常！");
             return;
