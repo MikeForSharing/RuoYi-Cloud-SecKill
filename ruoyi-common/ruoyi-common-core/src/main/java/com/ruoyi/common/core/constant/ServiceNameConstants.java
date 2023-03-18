@@ -26,4 +26,14 @@ public class ServiceNameConstants
      * 消息中间件服务的serviceid
      */
     public static final String RABBIT_SERVICE = "ruoyi-rabbit";
+
+    /**
+     * 秒杀服务的serviceid
+     */
+    public static final String SECKILL_SERVICE = "ruoyi-seckill";
+
+    /**
+     * 商品服务的serviceid
+     */
+    public static final String PRODUCT_SERVICE = "ruoyi-product";
 }
