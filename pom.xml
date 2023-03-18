@@ -241,6 +241,19 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <!-- 秒杀接口 -->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-api-seckill</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
+            <!-- 秒杀接口 -->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-api-product</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
 
             <!-- 消息中间件 -->
             <dependency>
