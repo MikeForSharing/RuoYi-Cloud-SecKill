@@ -11,7 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableCustomSwagger2
 @EnableRyFeignClients
 @SpringBootApplication
-@ComponentScan(basePackages = "com.ruoyi.product.api.*")
+@ComponentScan(basePackages = {"com.ruoyi.product.api.*","com.ruoyi.system.api.*","com.ruoyi.seckill.*"})
+
 public class RuoyiSeckillApplication {
 
     public static void main(String[] args) {

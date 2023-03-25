@@ -18,15 +18,4 @@
         select id,product_id,seckill_price,stock_count,time,intergral,start_date from t_seckill_product where to_days(start_date) = to_days(now()) and time = #{time} ;
     </select>
 
-    <update id="decrStock">
-        update t_seckill_product set stock_count = stock_count - 1 where id = #{seckillId} and stock_count>0
-    </update>
-
-    <update id="incrStock">
-        update t_seckill_product set stock_count = stock_count + 1 where id = #{seckillId}
-    </update>
-
-    <select id="getStockCount" decrStock="int">
-        select stock_count from t_seckill_product where id = #{seckillId}
-    </select>
 </mapper>

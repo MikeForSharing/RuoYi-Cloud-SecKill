@@ -16,27 +16,4 @@ public interface SeckillProductMapper {
      * @return
      */
     List<SeckillProduct> queryCurrentlySeckillProduct(Integer time);
-
-
-    /**
-     * 对秒杀商品库存进行递减操作
-     * @param seckillId
-     * @return 更新行数
-     */
-    int decrStock(Long seckillId);
-
-    /**
-     * 对秒杀商品库存进行增加操作
-     * @param seckillId
-     * @return 更新行数
-     */
-    int incrStock(Long seckillId);
-
-
-    /**
-     * 获取数据库中商品库存的数量
-     * @param seckillId
-     * @return
-     */
-    int getStockCount(Long seckillId);
 }

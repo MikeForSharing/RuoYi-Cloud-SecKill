@@ -12,12 +12,6 @@ public interface ISeckillProductService {
 
     List<SeckillProductVo> querySeckillProductListByTimeFromCache(Integer time);
 
+
     SeckillProductVo find(String time, Long seckillId);
-
-    String doSeckill(String userId, SeckillProductVo seckillProductVo);
-
-    int incrStockCount(Long seckillId);
-
-    void syncRedisStock(Integer time, Long seckillId);
-
 }
