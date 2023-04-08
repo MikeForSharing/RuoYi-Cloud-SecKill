@@ -17,41 +17,44 @@ import java.util.List;
  * @Author: Mike
  */
 @RestController
-@RequestMapping("/seckillProduct")
+@RequestMapping("/seckillProduct" )
 public class SeckillProductController extends BaseController {
     @Autowired
     private ISeckillProductService seckillProductService;
 
-    /**是否存入Redis？
-     * 获取秒杀商品列表（定时任务调用此接口）
+    /**
+     * 获取秒杀商品列表（定时任务调用此接口，在定时任务中将信息存入Redis）
+     *
      * @param time 秒杀场次
      * @return
      */
-    @GetMapping("/queryByTimeForJob")
-    public R<List<SeckillProductVo>> queryByTimeForJob(Integer time){
+    @GetMapping("/queryByTimeForJob" )
+    public R<List<SeckillProductVo>> queryByTimeForJob(Integer time) {
         return R.ok(seckillProductService.querySeckillProductListByTime(time));
     }
 
 
     /**
-     * 从Redis获取秒杀商品列表
+     * 从Redis中获取秒杀商品列表
+     *
      * @param time 秒杀场次
      * @return
      */
-    @RequestMapping("/queryByTime")
-    public R<List<SeckillProductVo>> queryByTime(Integer time){
+    @RequestMapping("/queryByTime" )
+    public R<List<SeckillProductVo>> queryByTime(Integer time) {
         return R.ok(seckillProductService.querySeckillProductListByTimeFromCache(time));
     }
 
     /**
      * 从Redis获取秒杀商品详情
-     * @param time  秒杀场次
-     * @param seckillId  秒杀商品Id
+     *
+     * @param time      秒杀场次
+     * @param seckillId 秒杀商品Id
      * @return
      */
-    @RequestMapping("/find")
-    public R<SeckillProductVo> find(String time,Long seckillId){
-        return R.ok(seckillProductService.find(time,seckillId));
+    @RequestMapping("/find" )
+    public R<SeckillProductVo> find(Integer time, Long seckillId) {
+        return R.ok(seckillProductService.findFromCache(time, seckillId));
     }
 
 }

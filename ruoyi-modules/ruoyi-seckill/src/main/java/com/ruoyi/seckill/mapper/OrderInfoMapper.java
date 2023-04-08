@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 public interface OrderInfoMapper {
     /**
      * 插入订单信息
+     *
      * @param orderInfo
      * @return
      */
@@ -17,6 +18,7 @@ public interface OrderInfoMapper {
 
     /**
      * 根据订单编号查找订单
+     *
      * @param orderNo
      * @return
      */
@@ -24,10 +26,11 @@ public interface OrderInfoMapper {
 
     /**
      * 将订单状态修改成取消状态
+     *
      * @param orderNo
      * @param status
      * @return
      */
-    int updateCancelStatus(@Param("orderNo") String orderNo, @Param("status") Integer status);
+    int updateCancelStatus(@Param("orderNo" ) String orderNo, @Param("status" ) Integer status);
 
 }

@@ -52,7 +52,7 @@ public class SeckillOrderSeviceImpl implements ISeckillOrderService {
         info.setOrderNo(IdUtils.fastUUID());
         orderInfoMapper.insert(info);
         String key = SeckillRedisKey.SECKILL_ORDER_SET.getRealKey(String.valueOf(seckillProductVo.getId()));
-        redisService.addCacheSet(key,userId);
+        redisService.addCacheSet(key, userId);
         return info.getOrderNo();
     }
 
@@ -60,13 +60,13 @@ public class SeckillOrderSeviceImpl implements ISeckillOrderService {
     @Transactional
     public int cancelOrder(String orderNo) {
         OrderInfo orderInfo = orderInfoMapper.find(orderNo);
-        if(OrderInfo.STATUS_ARREARAGE.equals(orderInfo.getStatus())){
+        if (OrderInfo.STATUS_ARREARAGE.equals(orderInfo.getStatus())) {
             orderInfoMapper.updateCancelStatus(orderNo, OrderInfo.STATUS_CANCEL);
             //增加真实库存
             seckillProductService.incrStockCount(orderInfo.getSeckillId());
             //同步预库存
-            seckillProductService.syncRedisStock(orderInfo.getSeckillTime(),orderInfo.getSeckillId());
-            System.out.println("取消订单成功");
+            seckillProductService.syncRedisStock(orderInfo.getSeckillTime(), orderInfo.getSeckillId());
+            System.out.println("取消订单成功" );
         }
         return 0;
     }
@@ -75,16 +75,16 @@ public class SeckillOrderSeviceImpl implements ISeckillOrderService {
     @Transactional
     public String doSeckill(String userId, SeckillProductVo vo) {
         int count = seckillProductMapper.decrStock(vo.getId());
-        if(count==0){
-            throw new SeckillException("商品已卖完！");
+        if (count == 0) {
+            throw new SeckillException("商品已卖完！" );
         }
         //使用数据库唯一索引保证用户不会重复下单
-        String orderNo = createOrderInfo(userId,vo);
+        String orderNo = createOrderInfo(userId, vo);
 
         //在redis的set集合中存放下单成功后的用户id，用于redis中查询是否重复下单
         //seckillOrderSet:12 [userId1,userId2,...]  ，或者通过canel可以实现，往数据库插入时自动同步到redis
         String orderSetKey = SeckillRedisKey.SECKILL_ORDER_SET.getRealKey(String.valueOf(vo.getId()));
-        redisService.addCacheSet(orderSetKey,userId);
+        redisService.addCacheSet(orderSetKey, userId);
         return orderNo;
     }
 }
