@@ -61,7 +61,11 @@ public class SeckillOrderSeviceImpl implements ISeckillOrderService {
     public int cancelOrder(String orderNo) {
         OrderInfo orderInfo = orderInfoMapper.find(orderNo);
         if (OrderInfo.STATUS_ARREARAGE.equals(orderInfo.getStatus())) {
-            orderInfoMapper.updateCancelStatus(orderNo, OrderInfo.STATUS_CANCEL);
+            //修改订单状态-运用状态机模式避免多线程修改订单状态出错（乐观锁思想）
+            int resCount = orderInfoMapper.updateCancelStatus(orderNo, OrderInfo.STATUS_CANCEL);
+            if (resCount==0){ //如果为0，说明已经被其他线程修改状态了
+                return -1;
+            }
             //增加真实库存
             seckillProductService.incrStockCount(orderInfo.getSeckillId());
             //同步预库存

@@ -15,6 +15,7 @@ import com.ruoyi.seckill.service.ISeckillProductService;
 import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,11 +48,10 @@ public class SeckillOrderController {
      *
      * @param time      场次
      * @param seckillId 秒杀商品id
-     * @param request
      * @return
      */
     @GetMapping("/doSeckill" )
-    public R<String> doSeckill(Integer time, Long seckillId, HttpServletRequest request) {
+    public R<String> doSeckill(Integer time, Long seckillId, @RequestHeader(SecurityConstants.FROM_SOURCE) String source) {
         Date now = new Date();
         SeckillProductVo seckillProductVo = seckillProductService.findFromCache(time, seckillId);
         //判断时间
@@ -81,4 +81,17 @@ public class SeckillOrderController {
         return R.ok("进入抢购队列,请等待结果" );
     }
 
+    /**
+     * 取消订单
+     * @param orderNo
+     * @return
+     */
+    @GetMapping("/cancelOrder" )
+    public R<String> cancelOrder(String orderNo, @RequestHeader(SecurityConstants.FROM_SOURCE) String source) {
+        int res = seckillOrderService.cancelOrder(orderNo);
+        if (res==-1){
+            return R.fail("取消订单失败");
+        }
+        return R.ok("取消订单成功");
+    }
 }

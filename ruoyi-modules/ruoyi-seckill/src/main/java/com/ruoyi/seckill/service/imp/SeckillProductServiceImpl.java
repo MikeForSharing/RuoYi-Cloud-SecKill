@@ -103,4 +103,7 @@ public class SeckillProductServiceImpl implements ISeckillProductService {
             redisService.setCacheMapValue(key, String.valueOf(seckillId), stockCount);
         }
     }
+
+
+
 }
