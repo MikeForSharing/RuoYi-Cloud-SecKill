@@ -17,23 +17,23 @@ import java.util.List;
  * @Author: Mike
  */
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/product" )
 public class ProductController extends BaseController {
 
     @Autowired
     private IProductService productService;
 
     @InnerAuth
-    @GetMapping("/selectProductListByIds/{pids}")
-    public R<List<Product>> selectProductListByIds(@PathVariable("pids") List<Long> pids){
-        if(pids==null || pids.size()==0){
+    @GetMapping("/selectProductListByIds/{pids}" )
+    public R<List<Product>> selectProductListByIds(@PathVariable("pids" ) List<Long> pids) {
+        if (pids == null || pids.size() == 0) {
             return R.ok(Collections.emptyList());
         }
         return R.ok(productService.selectProductListByIds(pids));
     }
 
-    @GetMapping("/test")
-    public R<List<String>> test(){
+    @GetMapping("/test" )
+    public R<List<String>> test() {
         return R.ok();
     }
 }
