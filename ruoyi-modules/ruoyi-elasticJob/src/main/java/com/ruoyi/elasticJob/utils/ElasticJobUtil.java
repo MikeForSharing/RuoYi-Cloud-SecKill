@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
  * @Author: Mike
  * @Date: 2022/12/28 0028
  * @Version： 1.0.0
+ * 用于创建LiteJobConfiguration对象
  */
 public class ElasticJobUtil {
     public static LiteJobConfiguration createJobConfiguration(final Class<? extends SimpleJob> jobClass,
@@ -21,13 +22,13 @@ public class ElasticJobUtil {
                                                               boolean dataflowType) {
         // 定义作业核心配置
         JobCoreConfiguration.Builder jobCoreConfigurationBuilder = JobCoreConfiguration.newBuilder(jobClass.getSimpleName(), cron, shardingTotalCount);
-        if(!StringUtils.isEmpty(shardingItemParameters)){
+        if (!StringUtils.isEmpty(shardingItemParameters)) {
             jobCoreConfigurationBuilder.shardingItemParameters(shardingItemParameters);
         }
         JobTypeConfiguration jobConfig = null;
-        if(dataflowType){
-            jobConfig = new DataflowJobConfiguration(jobCoreConfigurationBuilder.build(),jobClass.getCanonicalName(),true);
-        }else {
+        if (dataflowType) {
+            jobConfig = new DataflowJobConfiguration(jobCoreConfigurationBuilder.build(), jobClass.getCanonicalName(), true);
+        } else {
             // 定义SIMPLE类型配置
             jobConfig = new SimpleJobConfiguration(jobCoreConfigurationBuilder.build(), jobClass.getCanonicalName());
         }
@@ -35,11 +36,13 @@ public class ElasticJobUtil {
         LiteJobConfiguration simpleJobRootConfig = LiteJobConfiguration.newBuilder(jobConfig).overwrite(true).build();
         return simpleJobRootConfig;
     }
+
     public static LiteJobConfiguration createDefaultSimpleJobConfiguration(final Class<? extends SimpleJob> jobClass, final String cron) {
-        return createJobConfiguration(jobClass,cron,1,null,false);
+        return createJobConfiguration(jobClass, cron, 1, null, false);
     }
+
     public static LiteJobConfiguration createDefaultDataFlowJobConfiguration(final Class<? extends SimpleJob> jobClass, final String cron) {
-        return createJobConfiguration(jobClass,cron,1,null,true);
+        return createJobConfiguration(jobClass, cron, 1, null, true);
     }
 
 

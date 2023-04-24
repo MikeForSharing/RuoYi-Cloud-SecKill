@@ -27,7 +27,7 @@ import java.util.Set;
 @RefreshScope
 @Slf4j
 public class UserCacheJob implements SimpleJob {
-    @Value("${jobCron.userCache}")
+    @Value("${jobCron.userCache}" )
     private String cron;
 
     @Autowired
@@ -35,20 +35,21 @@ public class UserCacheJob implements SimpleJob {
 
     @Override
     public void execute(ShardingContext shardingContext) {
+        System.out.println("shardingContext " + shardingContext);
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE,-7);
+        calendar.add(Calendar.DATE, -7);
 
         //获取7天前的最近日期的时间值
         Long maxScore = calendar.getTime().getTime();
-        String userZSetKey = JobRedisKey.USER_ZSET.getRealKey("");
-        String userLoginHashKey = JobRedisKey.USERLOGIN_HASH.getRealKey("");
+        String userZSetKey = JobRedisKey.USER_ZSET.getRealKey("" );
+        String userLoginHashKey = JobRedisKey.USERLOGIN_HASH.getRealKey("" );
         //查询7天前的用户ID集合
         Set<String> ids = redisService.getRangeByScore(userZSetKey, 0, maxScore);
         //删除7天前的用户缓存数据
-        if(ids.size()>0){
-            redisService.deleteCacheMapValue(userLoginHashKey,ids.toArray());
+        if (ids.size() > 0) {
+            redisService.deleteCacheMapValue(userLoginHashKey, ids.toArray());
         }
-        redisService.removeRangeByScore(userZSetKey,0,calendar.getTime().getTime());
+        redisService.removeRangeByScore(userZSetKey, 0, calendar.getTime().getTime());
 
     }
 }

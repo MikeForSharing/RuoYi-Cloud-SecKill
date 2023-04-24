@@ -6,20 +6,21 @@ import com.ruoyi.common.swagger.annotation.EnableCustomSwagger2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * 定时任务
- * 
+ *
  * @author ruoyi
  */
 @EnableCustomConfig
-@EnableCustomSwagger2   
+@EnableCustomSwagger2
 @EnableRyFeignClients
-@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
-public class RuoYiElasticJobApplication
-{
-    public static void main(String[] args)
-    {
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@ComponentScan(basePackages = {"com.ruoyi.seckill.api.*" , "com.ruoyi.elasticJob.*"})
+
+public class RuoYiElasticJobApplication {
+    public static void main(String[] args) {
         SpringApplication.run(RuoYiElasticJobApplication.class, args);
         System.out.println("(♥◠‿◠)ﾉﾞ  elastic定时任务模块启动成功   ლ(´ڡ`ლ)ﾞ  \n" +
                 " .-------.       ____     __        \n" +
@@ -30,6 +31,6 @@ public class RuoYiElasticJobApplication
                 " |  |\\ \\  |  ||   |(_,_)'         \n" +
                 " |  | \\ `'   /|   `-'  /           \n" +
                 " |  |  \\    /  \\      /           \n" +
-                " ''-'   `'-'    `-..-'              ");
+                " ''-'   `'-'    `-..-'              " );
     }
 }

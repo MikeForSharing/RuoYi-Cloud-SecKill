@@ -16,16 +16,17 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class ElasticJobConfig {
-    @Bean(initMethod = "init")
-    public SpringJobScheduler initUserCacheJob(CoordinatorRegistryCenter registryCenter, UserCacheJob userCacheJob){
+    @Bean(initMethod = "init" )
+    public SpringJobScheduler initUserCacheJob(CoordinatorRegistryCenter registryCenter, UserCacheJob userCacheJob) {
         LiteJobConfiguration jobConfiguration = ElasticJobUtil.createDefaultSimpleJobConfiguration(userCacheJob.getClass(), userCacheJob.getCron());
-        SpringJobScheduler springJobScheduler = new SpringJobScheduler(userCacheJob, registryCenter,jobConfiguration );
+        SpringJobScheduler springJobScheduler = new SpringJobScheduler(userCacheJob, registryCenter, jobConfiguration);
         return springJobScheduler;
     }
-    @Bean(initMethod = "init")
-    public SpringJobScheduler initSeckillProductCacheJob(CoordinatorRegistryCenter registryCenter, SeckillProductCacheJob seckillProductCacheJob){
-        LiteJobConfiguration jobConfiguration = ElasticJobUtil.createJobConfiguration(seckillProductCacheJob.getClass(), seckillProductCacheJob.getCron(),3,"0=10,1=12,2=14",false);
-        SpringJobScheduler springJobScheduler = new SpringJobScheduler(seckillProductCacheJob, registryCenter,jobConfiguration);
+
+    @Bean(initMethod = "init" )
+    public SpringJobScheduler initSeckillProductCacheJob(CoordinatorRegistryCenter registryCenter, SeckillProductCacheJob seckillProductCacheJob) {
+        LiteJobConfiguration jobConfiguration = ElasticJobUtil.createJobConfiguration(seckillProductCacheJob.getClass(), seckillProductCacheJob.getCron(), 3, "0=10,1=12,2=14" , false);
+        SpringJobScheduler springJobScheduler = new SpringJobScheduler(seckillProductCacheJob, registryCenter, jobConfiguration);
         return springJobScheduler;
     }
 }
