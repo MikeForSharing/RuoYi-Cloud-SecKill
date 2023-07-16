@@ -3,7 +3,7 @@ server:
   port: 9203
 
 # Spring
-spring: 
+spring:
   application:
     # 应用名称
     name: ruoyi-job
@@ -22,4 +22,4 @@ spring:
         file-extension: yml
         # 共享配置
         shared-configs:
-          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
