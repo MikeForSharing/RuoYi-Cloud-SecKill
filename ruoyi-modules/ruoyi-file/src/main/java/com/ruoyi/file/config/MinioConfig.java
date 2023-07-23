@@ -11,9 +11,8 @@ import io.minio.MinioClient;
  * @author ruoyi
  */
 @Configuration
-@ConfigurationProperties(prefix = "minio")
-public class MinioConfig
-{
+@ConfigurationProperties(prefix = "minio" )
+public class MinioConfig {
     /**
      * 服务地址
      */
@@ -34,50 +33,41 @@ public class MinioConfig
      */
     private String bucketName;
 
-    public String getUrl()
-    {
+    public String getUrl() {
 
         return url;
     }
 
-    public void setUrl(String url)
-    {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public String getAccessKey()
-    {
+    public String getAccessKey() {
         return accessKey;
     }
 
-    public void setAccessKey(String accessKey)
-    {
+    public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
     }
 
-    public String getSecretKey()
-    {
+    public String getSecretKey() {
         return secretKey;
     }
 
-    public void setSecretKey(String secretKey)
-    {
+    public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
     }
 
-    public String getBucketName()
-    {
+    public String getBucketName() {
         return bucketName;
     }
 
-    public void setBucketName(String bucketName)
-    {
+    public void setBucketName(String bucketName) {
         this.bucketName = bucketName;
     }
 
     @Bean
-    public MinioClient getMinioClient()
-    {
+    public MinioClient getMinioClient() {
         return MinioClient.builder().endpoint(url).credentials(accessKey, secretKey).build();
     }
 }
