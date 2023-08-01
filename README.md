@@ -104,13 +104,12 @@ com.ruoyi
     ![企业微信截图_16908570211309](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/3d62af54-3321-4231-a57c-ce48a3984c25)  
 
 3.  模拟并发量：
-   
-    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/bb98753f-5f13-4de0-a8ea-91a3e03a528e)
-
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/053986d8-1f28-4f92-8f9a-4885af161f88)
+    
 4.  测试结果:
+      
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/8e299141-88a3-4b85-b337-1d12f0f1f2a0)
   
-    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/2e5f49a0-45e7-4205-a8a2-d9ceb8c59357)
-
 5.  秒杀操作完成后，数据库秒杀商品表中库存数量为0，没有出现超卖的情况：
      
     ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/1d7b5960-3d8c-43a7-a71a-191e3101009e)
