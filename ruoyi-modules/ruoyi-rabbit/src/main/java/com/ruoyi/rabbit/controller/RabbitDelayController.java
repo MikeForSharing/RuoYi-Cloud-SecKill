@@ -15,8 +15,8 @@ import java.util.Objects;
 
 @Slf4j
 @RestController
-@RequestMapping("rabbitmq" )
-public class RabbitController {
+@RequestMapping("rabbitDelay" )
+public class RabbitDelayController {
 
     @Resource
     private DelayMessageProducer producer;
@@ -25,7 +25,7 @@ public class RabbitController {
     private RabbitService rabbitService;
 
     /**
-     * 向消息队列发消息
+     * 向延迟消息队列发消息
      */
     @GetMapping("/sendMQ/{message}&&{delayType}" )
     public void sendMQ(@PathVariable("message" ) String message, @PathVariable("delayType" ) int delayType) {

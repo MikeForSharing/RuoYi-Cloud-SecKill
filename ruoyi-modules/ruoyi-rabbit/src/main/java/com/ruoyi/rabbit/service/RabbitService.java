@@ -1,8 +1,6 @@
 package com.ruoyi.rabbit.service;
 
 import com.ruoyi.system.api.domain.SysUser;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 public interface RabbitService {
     /**
@@ -19,7 +17,7 @@ public interface RabbitService {
      * @param emailCode 邮件激活码
      * @return 保存结果
      */
-    public int updateEmailCode(String emailCode,Long userId);
+    public int updateEmailCode(String emailCode, Long userId);
 
     /**
      * 激活账户
@@ -31,18 +29,20 @@ public interface RabbitService {
 
     /**
      * 以html的格式发送邮件
+     *
      * @param user 用户
-     * @return  邮件激活码
+     * @return 邮件激活码
      */
     public String sendMailHtml(SysUser user);
 
     /**
      * 以html的格式发送邮件
-     * @param message 消息内容
+     *
+     * @param message   消息内容
      * @param delayType 延迟时间类型
-     * @return  邮件激活码
+     * @return 邮件激活码
      */
-    public void sendMQ(String message,Integer delayType);
+    public void sendMQ(String message, Integer delayType);
 
     /**
      * 通过用户ID删除用户

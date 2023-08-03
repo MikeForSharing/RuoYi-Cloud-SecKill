@@ -5,13 +5,13 @@ import com.ruoyi.common.security.annotation.EnableRyFeignClients;
 import com.ruoyi.common.swagger.annotation.EnableCustomSwagger2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 
 @EnableCustomConfig
 @EnableCustomSwagger2
 @EnableRyFeignClients
-//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.ruoyi.seckill.api.*" , "com.ruoyi.rabbit.*"})
 public class RuoyiRabbitApplication {
 
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class RuoyiRabbitApplication {
                 " |  |\\ \\  |  ||   |(_,_)'         \n" +
                 " |  | \\ `'   /|   `-'  /           \n" +
                 " |  |  \\    /  \\      /           \n" +
-                " ''-'   `'-'    `-..-'              ");
+                " ''-'   `'-'    `-..-'              " );
     }
 
 }

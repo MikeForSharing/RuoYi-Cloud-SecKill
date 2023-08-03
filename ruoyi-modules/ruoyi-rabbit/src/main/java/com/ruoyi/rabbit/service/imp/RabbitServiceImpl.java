@@ -29,7 +29,7 @@ public class RabbitServiceImpl implements RabbitService {
     private JavaMailSender jms;
 
     //读取配置文件邮箱账号参数
-    @Value("${spring.mail.username}")
+    @Value("${spring.mail.username}" )
     private String sender;
 
     @Resource
@@ -37,6 +37,7 @@ public class RabbitServiceImpl implements RabbitService {
 
     /**
      * 判定帐户是否激活
+     *
      * @param code 用户激活码
      * @return 激活结果
      */
@@ -48,13 +49,13 @@ public class RabbitServiceImpl implements RabbitService {
 
     /**
      * 通过用户ID删除用户
+     *
      * @param userId 用户ID
      * @return 结果
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int deleteUserById(Long userId)
-    {
+    public int deleteUserById(Long userId) {
         return rabbitMapper.deleteUserById(userId);
     }
 
@@ -83,12 +84,13 @@ public class RabbitServiceImpl implements RabbitService {
 
     /**
      * 以html的格式发送邮件
+     *
      * @param user 用户
-     * @return  邮件激活码
+     * @return 邮件激活码
      */
     @Override
     public String sendMailHtml(SysUser user) {
-        String code = UUID.randomUUID().toString().replace("-", "");
+        String code = UUID.randomUUID().toString().replace("-" , "" );
         MimeMessage mimeMessage = jms.createMimeMessage();
         try {
             // 建立邮件消息
@@ -98,17 +100,17 @@ public class RabbitServiceImpl implements RabbitService {
             // 接收者
             messageHelper.setTo(user.getEmail());
             // 发送的标题
-            messageHelper.setSubject("邮箱激活验证");
+            messageHelper.setSubject("邮箱激活验证" );
             // 发送的内容
             String msg = "<p>您好，感谢您注册账户！</p>" +
-                    "<p><h1>此邮件为官方激活邮件！请点击下面链接完成激活操作！</h1><h3><a href='http://localhost:9204/rabbitmq/activeAccount?activeCode=" + code + "&userId="+user.getUserId()+"'>点击此处</a></h3></p>" +
+                    "<p><h1>此邮件为官方激活邮件！请点击下面链接完成激活操作！</h1><h3><a href='http://localhost:9204/rabbitmq/activeAccount?activeCode=" + code + "&userId=" + user.getUserId() + "'>点击此处</a></h3></p>" +
                     "<p>如果不是本人操作，请忽略。</p>";
             messageHelper.setText(msg, true);
             // 发送邮件
             jms.send(mimeMessage);
             log.info("已发送的邮件激活码是：" + code);
         } catch (Exception e) {
-            log.error("发送邮件失败");
+            log.error("发送邮件失败" );
             System.out.println(e);
             return "-1";
         }
@@ -117,7 +119,8 @@ public class RabbitServiceImpl implements RabbitService {
 
     /**
      * 向消息队列发消息
-     * @param message 消息体
+     *
+     * @param message   消息体
      * @param delayType 延迟类型
      */
     @Override

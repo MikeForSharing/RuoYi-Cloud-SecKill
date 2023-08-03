@@ -37,14 +37,14 @@ public class DeadLetterQueueConsumer {
 
     // 监听死信队列B
     @RabbitListener(queues = DEAD_LETTER_QUEUE_B_NAME)
-    public void receiveB(Message message, Channel channel)  throws Exception{
+    public void receiveB(Message message, Channel channel) throws Exception {
         this.messageHan(message, channel);
     }
 
     //处理消息
-    public void messageHan(Message message, Channel channel) throws Exception{
+    public void messageHan(Message message, Channel channel) throws Exception {
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
-        String messageId = message.getMessageProperties().getHeader("spring_returned_message_correlation");
+        String messageId = message.getMessageProperties().getHeader("spring_returned_message_correlation" );
         try {
             //消费者在消费消息之前，先去redis中查看消息状态是否已被消费，0：未消费  1：已消费
             if (redisService.setCacheObjectIfAbsent(messageId, RabbitConstants.REDIS_MESSAGE_CONSUME_NO, RabbitConstants.REDIS_MESSAGEID_EXPIRATION, TimeUnit.SECONDS)) {
@@ -53,10 +53,10 @@ public class DeadLetterQueueConsumer {
                 String msg = new String(message.getBody());
                 JSONObject jsonObject = JSONObject.parseObject(msg);
                 // 判断消息类型是否为邮件激活码激活帐户
-                if (jsonObject.getInteger("type") == RabbitConstants.EMAIL_CODE_TYPE) {
-                    String emailCode = JSONObject.parseObject(jsonObject.getString("activeCode")).get("data").toString();
+                if (jsonObject.getInteger("type" ) == RabbitConstants.EMAIL_CODE_TYPE) {
+                    String emailCode = JSONObject.parseObject(jsonObject.getString("activeCode" )).get("data" ).toString();
                     if (!rabbitService.isActive(emailCode)) {  //邮箱在有效期内未激活
-                        Long userId = Long.valueOf(jsonObject.getString("userId"));
+                        Long userId = Long.valueOf(jsonObject.getString("userId" ));
                         rabbitService.deleteUserById(userId);
                     }
                 }
@@ -71,10 +71,10 @@ public class DeadLetterQueueConsumer {
                     channel.basicAck(deliveryTag, false);
                 }
             }
-            log.info("当前时间：{}，死信队列A收到消息：{}", LocalDateTime.now(), new String(message.getBody()));
+            log.info("当前时间：{}，死信队列A收到消息：{}" , LocalDateTime.now(), new String(message.getBody()));
         } catch (IOException e) {
             e.printStackTrace();
-            log.error("再次将消息退回队列");
+            log.error("再次将消息退回队列" );
             channel.basicNack(deliveryTag, true, true);
         }
     }

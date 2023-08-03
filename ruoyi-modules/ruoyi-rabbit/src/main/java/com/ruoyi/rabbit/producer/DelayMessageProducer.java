@@ -23,22 +23,23 @@ public class DelayMessageProducer {
     private RabbitTemplate rabbitTemplate;
 
     /**
-     * 向消息队列发消息
-     * @param message 消息体
+     * 向延迟消息队列发消息
+     *
+     * @param message   消息体
      * @param delayType 延迟类型
      */
     public void send(String message, DelayTypeEnum delayType) {
         String uniqueId = UUID.randomUUID().toString();
         MessageProperties properties = new MessageProperties();
-        properties.setContentEncoding("utf-8");
+        properties.setContentEncoding("utf-8" );
         properties.setDeliveryMode(MessageDeliveryMode.PERSISTENT);
         Message messageHan = new Message(message.getBytes(), properties);
         switch (delayType) {
             case DELAY_30m:
-                rabbitTemplate.convertAndSend(DELAY_EXCHANGE_NAME, DELAY_QUEUE_A_ROUTING_KEY, messageHan,new CorrelationData(uniqueId));
+                rabbitTemplate.convertAndSend(DELAY_EXCHANGE_NAME, DELAY_QUEUE_A_ROUTING_KEY, messageHan, new CorrelationData(uniqueId));
                 break;
             case DELAY_60m:
-                rabbitTemplate.convertAndSend(DELAY_EXCHANGE_NAME, DELAY_QUEUE_B_ROUTING_KEY, messageHan,new CorrelationData(uniqueId));
+                rabbitTemplate.convertAndSend(DELAY_EXCHANGE_NAME, DELAY_QUEUE_B_ROUTING_KEY, messageHan, new CorrelationData(uniqueId));
                 break;
             default:
         }

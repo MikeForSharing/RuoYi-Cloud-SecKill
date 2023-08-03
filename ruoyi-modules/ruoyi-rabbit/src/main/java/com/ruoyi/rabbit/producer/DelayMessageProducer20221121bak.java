@@ -37,7 +37,7 @@ public class DelayMessageProducer20221121bak {
         MessageProperties properties = new MessageProperties();
 //        properties.setMessageId(uniqueId);
 //        properties.setContentType("text/plain");
-        properties.setContentEncoding("utf-8");
+        properties.setContentEncoding("utf-8" );
         //如果延迟队列没设置 x-message-ttl，消息存活时间为properties.setExpiration("5000");如果延迟队列设置了 x-message-ttl 消息存活时间，properties.setExpiration("5000")也设置了有效期，则取两者中较小值有效
 //        properties.setExpiration("30000");
         properties.setDeliveryMode(MessageDeliveryMode.PERSISTENT);
@@ -45,7 +45,7 @@ public class DelayMessageProducer20221121bak {
 
         switch (type) {
             case DELAY_30m:
-                rabbitTemplate.convertAndSend(DELAY_EXCHANGE_NAME, DELAY_QUEUE_A_ROUTING_KEY, messageHan,new CorrelationData(uniqueId));
+                rabbitTemplate.convertAndSend(DELAY_EXCHANGE_NAME, DELAY_QUEUE_A_ROUTING_KEY, messageHan, new CorrelationData(uniqueId));
 //                rabbitTemplate.convertAndSend(DELAY_EXCHANGE_NAME, DELAY_QUEUE_A_ROUTING_KEY, message);
 
                 break;

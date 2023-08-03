@@ -1,6 +1,5 @@
 package com.ruoyi.rabbit.mapper;
 
-import com.ruoyi.system.api.domain.SysUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -26,10 +25,10 @@ public interface RabbitMapper {
      * 更新邮件激活码
      *
      * @param emailCode 邮件激活码
-     * @param userId 用户ID
+     * @param userId    用户ID
      * @return 保存结果
      */
-    public int updateEmailCode(@Param("emailCode") String emailCode,@Param("userId") Long userId);
+    public int updateEmailCode(@Param("emailCode" ) String emailCode, @Param("userId" ) Long userId);
 
     /**
      * 通过用户ID删除用户

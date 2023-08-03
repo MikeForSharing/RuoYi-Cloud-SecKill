@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.rabbit.mapper.RabbitMapper">
-	<select id="selectUserIdByEmailCode" resultType="String">
+    <select id="selectUserIdByEmailCode" resultType="String">
 		select user_id from sys_user
 		where email_code = #{code}
 	</select>
-	<update id="updateEmailCode">
+    <update id="updateEmailCode">
 		update sys_user set email_code = #{emailCode}	where
 		 del_flag = '0' and
 		 user_id = #{userId}
 	</update>
 
 
-	<update id="updateUserStatusByUserId">
+    <update id="updateUserStatusByUserId">
 		update sys_user set status = 0	where user_id = #{userId}
 	</update>
 
-	<delete id="deleteUserById" parameterType="Long">
+    <delete id="deleteUserById" parameterType="Long">
  		update sys_user set del_flag = '2' where user_id = #{userId}
  	</delete>
 
-	<!--<update id="updateUserStatusByEmailCode">-->
-		<!--update sys_user set status = 1	where email_code = #{emailCode}-->
-	<!--</update>-->
+    <!--<update id="updateUserStatusByEmailCode">-->
+    <!--update sys_user set status = 1	where email_code = #{emailCode}-->
+    <!--</update>-->
 
 </mapper> 
