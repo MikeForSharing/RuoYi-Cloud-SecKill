@@ -27,8 +27,18 @@ public class RemoteSeckillProductFallbackFactory implements FallbackFactory<Remo
         return new RemoteSeckillProductService()
         {
             @Override
-            public R<List<SeckillProductVo>> queryByTimeForJob(Integer time){
+            public R<List<SeckillProductVo>> queryByTimeForJob(Integer time, String source){
                 return R.fail("同步秒杀产品列表信息失败:" + throwable.getMessage());
+            }
+
+            @Override
+            public R<SeckillProductVo> find(String time, Long seckillId, String source) {
+                return R.fail("查找秒杀商品信息失败:" + throwable.getMessage());
+            }
+
+            @Override
+            public R<String> syncRedisStock(Integer time, Long seckillId, String source) {
+                return R.fail("同步Redis中秒杀商品库存数量操作失败:" + throwable.getMessage());
             }
         };
     }
