@@ -39,7 +39,7 @@ public class SeckillProductCacheJob implements SimpleJob {
     @Override
     public void execute(ShardingContext shardingContext) {
         String time = shardingContext.getShardingParameter();
-        System.out.println("执行定时任务（秒杀商品列表信息保存至Redis）" );
+        System.out.println("执行定时任务（秒杀商品列表信息保存至Redis），场次："+time );
         R<List<SeckillProductVo>> result = remoteSeckillProductService.queryByTimeForJob(Integer.parseInt(time), SecurityConstants.INNER);
         if (result == null || result.getCode() != 200) {
             System.out.println("定时任务执行异常！" );
