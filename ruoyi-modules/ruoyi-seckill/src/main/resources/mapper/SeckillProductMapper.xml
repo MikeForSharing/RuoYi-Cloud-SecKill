@@ -3,7 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.seckill.mapper.SeckillProductMapper">
-
     <resultMap type="SeckillProduct" id="SeckillProductResult">
         <id property="id" column="id"/>
         <result property="productId" column="product_id"/>
@@ -29,5 +28,12 @@
 
     <select id="getStockCount" resultType="int">
         select stock_count from t_seckill_product where id = #{seckillId}
+    </select>
+
+
+
+
+    <select id="findSeckillId" resultType="Long">
+        select id from t_seckill_product where product_id = #{productId}
     </select>
 </mapper>

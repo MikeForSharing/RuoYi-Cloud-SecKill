@@ -50,10 +50,29 @@ public class SeckillOrderSeviceImpl implements ISeckillOrderService {
         info.setSeckillTime(seckillProductVo.getTime());
         info.setUserId(Long.parseLong(userId));
         info.setOrderNo(IdUtils.fastUUID());
+
+        //
         orderInfoMapper.insert(info);
-        String key = SeckillRedisKey.SECKILL_ORDER_SET.getRealKey(String.valueOf(seckillProductVo.getId()));
-        redisService.addCacheSet(key, userId);
+//        String key = SeckillRedisKey.SECKILL_ORDER_SET.getRealKey(String.valueOf(seckillProductVo.getId()));
+//        redisService.addCacheSet(key, userId);
         return info.getOrderNo();
+    }
+
+    @Override
+    @Transactional
+    public String doSeckill(String userId, SeckillProductVo vo) {
+        int count = seckillProductMapper.decrStock(vo.getId());
+        if (count == 0) { //若影响行数为0，说明库存为0，从而避免超卖
+            throw new SeckillException("商品已卖完！" );
+        }
+        //使用数据库唯一索引保证用户不会重复下单
+        String orderNo = createOrderInfo(userId, vo);
+
+        //在redis的set集合中存放下单成功后的用户id，用于redis中查询是否重复下单
+        //seckillOrderSet:12 [userId1,userId2,...]  ，或者通过canel可以实现，往数据库插入时自动同步到redis
+        String orderSetKey = SeckillRedisKey.SECKILL_ORDER_SET.getRealKey(String.valueOf(vo.getId()));
+        redisService.addCacheSet(orderSetKey, userId);
+        return orderNo;
     }
 
     @Override
@@ -70,25 +89,13 @@ public class SeckillOrderSeviceImpl implements ISeckillOrderService {
             seckillProductService.incrStockCount(orderInfo.getSeckillId());
             //同步预库存
             seckillProductService.syncRedisStock(orderInfo.getSeckillTime(), orderInfo.getSeckillId());
+
+            //删除存储在redis的set集合中存放下单成功后的用户id
+            Long seckillId =  seckillProductMapper.findSeckillId(orderInfo.getProductId());
+            String orderSetKey = SeckillRedisKey.SECKILL_ORDER_SET.getRealKey(String.valueOf(seckillId));
+            redisService.deleteCacheSet(orderSetKey, orderInfo.getUserId().toString());
             System.out.println("取消订单成功" );
         }
         return 0;
-    }
-
-    @Override
-    @Transactional
-    public String doSeckill(String userId, SeckillProductVo vo) {
-        int count = seckillProductMapper.decrStock(vo.getId());
-        if (count == 0) {
-            throw new SeckillException("商品已卖完！" );
-        }
-        //使用数据库唯一索引保证用户不会重复下单
-        String orderNo = createOrderInfo(userId, vo);
-
-        //在redis的set集合中存放下单成功后的用户id，用于redis中查询是否重复下单
-        //seckillOrderSet:12 [userId1,userId2,...]  ，或者通过canel可以实现，往数据库插入时自动同步到redis
-        String orderSetKey = SeckillRedisKey.SECKILL_ORDER_SET.getRealKey(String.valueOf(vo.getId()));
-        redisService.addCacheSet(orderSetKey, userId);
-        return orderNo;
     }
 }

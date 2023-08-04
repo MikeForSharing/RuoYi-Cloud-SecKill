@@ -97,10 +97,19 @@ public class SeckillProductServiceImpl implements ISeckillProductService {
 
     @Override
     public void syncRedisStock(Integer time, Long seckillId) {
-        int stockCount = seckillProductMapper.getStockCount(seckillId);
+        Integer stockCount = seckillProductMapper.getStockCount(seckillId);
         if (stockCount > 0) {
             String key = SeckillRedisKey.SECKILL_STOCK_COUNT_HASH.getRealKey(String.valueOf(time));
-            redisService.setCacheMapValue(key, String.valueOf(seckillId), stockCount);
+
+            //FIXME
+            try {
+//                redisService.setCacheMapValue(key, Long.toString(seckillId), stockCount);
+                redisService.setCacheMapValue(key, seckillId.toString(), stockCount.toString());
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
     }
 

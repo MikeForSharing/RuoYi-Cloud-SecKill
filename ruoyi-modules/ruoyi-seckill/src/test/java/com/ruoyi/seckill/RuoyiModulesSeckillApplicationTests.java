@@ -1,4 +1,4 @@
-package com.ruoyi.rabbit;
+package com.ruoyi.seckill;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

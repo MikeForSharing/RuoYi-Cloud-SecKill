@@ -11,21 +11,12 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableCustomSwagger2
 @EnableRyFeignClients
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.ruoyi.product.api.*" , "com.ruoyi.rabbit.api.*" , "com.ruoyi.system.api.*" , "com.ruoyi.seckill.*"})
+@ComponentScan(basePackages = {"com.ruoyi.product.api.*" , "com.ruoyi.rabbit.api.*" , "com.ruoyi.system.api.*" , "com.ruoyi.seckill.*", "com.ruoyi.common.rabbitmq.*"})
 public class RuoyiSeckillApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RuoyiSeckillApplication.class, args);
-        System.out.println("(♥◠‿◠)ﾉﾞ  秒杀模块启动成功   ლ(´ڡ`ლ)ﾞ  \n" +
-                " .-------.       ____     __        \n" +
-                " |  _ _   \\      \\   \\   /  /    \n" +
-                " | ( ' )  |       \\  _. /  '       \n" +
-                " |(_ o _) /        _( )_ .'         \n" +
-                " | (_,_).' __  ___(_ o _)'          \n" +
-                " |  |\\ \\  |  ||   |(_,_)'         \n" +
-                " |  | \\ `'   /|   `-'  /           \n" +
-                " |  |  \\    /  \\      /           \n" +
-                " ''-'   `'-'    `-..-'              " );
+        System.out.println("启动成功" );
     }
 
 }

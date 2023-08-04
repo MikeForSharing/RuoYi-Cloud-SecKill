@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ruoyi.seckill.mapper.OrderInfoMapper">
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="order_no">
     insert into t_order_info (order_no,user_id,product_id,product_img,delivery_addr_id,product_name,product_price,seckill_price,status,create_date,pay_date,seckill_date,seckill_time,seckill_id,intergral)
             values
             (#{orderNo},#{userId},#{productId},#{productImg},#{deliveryAddrId},#{productName},#{productPrice},#{seckillPrice},#{status},#{createDate},#{payDate},#{seckillDate},#{seckillTime},#{seckillId},#{intergral})
   </insert>
 
 
-    <select id="find" resultType="com.ruoyi.seckill.api.model.OrderInfo">
+    <!--<select id="find" resultType="com.ruoyi.seckill.api.model.OrderInfo">-->
+        <!--select * from t_order_info where order_no = #{orderNo}-->
+    <!--</select>-->
+
+    <resultMap id="OrderInfoResMap" type="com.ruoyi.seckill.api.model.OrderInfo">
+        <id column="order_no" jdbcType="VARCHAR" property="orderNo" />
+        <result column="user_id" jdbcType="TIMESTAMP" property="userId" />
+        <result column="product_id" jdbcType="TIMESTAMP" property="productId" />
+        <result column="product_img" jdbcType="INTEGER" property="productImg" />
+        <result column="delivery_addr_id" jdbcType="TIMESTAMP" property="deliveryAddrId" />
+        <result column="product_name" jdbcType="INTEGER" property="productName" />
+        <result column="product_price" jdbcType="INTEGER" property="productPrice" />
+        <result column="seckill_price" jdbcType="INTEGER" property="seckillPrice" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_date" jdbcType="INTEGER" property="createDate" />
+        <result column="pay_date" jdbcType="INTEGER" property="payDate" />
+        <result column="seckill_date" jdbcType="INTEGER" property="seckillDate" />
+        <result column="seckill_time" jdbcType="INTEGER" property="seckillTime" />
+        <result column="intergral" jdbcType="INTEGER" property="intergral" />
+        <result column="seckill_id" jdbcType="INTEGER" property="seckillId" />
+        <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    </resultMap>
+
+    <select id="find" resultMap="OrderInfoResMap">
         select * from t_order_info where order_no = #{orderNo}
     </select>
+
 
     <update id="updateCancelStatus">
         update t_order_info set status = #{status} where order_no= #{orderNo} and status = 0
     </update>
+
+
+
 </mapper>

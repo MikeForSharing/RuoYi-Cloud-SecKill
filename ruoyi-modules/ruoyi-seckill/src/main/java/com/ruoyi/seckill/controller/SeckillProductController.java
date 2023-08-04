@@ -3,6 +3,7 @@ package com.ruoyi.seckill.controller;
 import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.web.controller.BaseController;
 import com.ruoyi.seckill.api.model.SeckillProductVo;
+import com.ruoyi.seckill.enums.SeckillRedisKey;
 import com.ruoyi.seckill.service.ISeckillProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/seckillProduct" )
 public class SeckillProductController extends BaseController {
+
+
     @Autowired
     private ISeckillProductService seckillProductService;
 
@@ -28,7 +31,7 @@ public class SeckillProductController extends BaseController {
      * @param time 秒杀场次
      * @return
      */
-    @GetMapping("/queryByTimeForJob" )
+    @GetMapping("/queryByTimeForJob")
     public R<List<SeckillProductVo>> queryByTimeForJob(Integer time) {
         return R.ok(seckillProductService.querySeckillProductListByTime(time));
     }
@@ -56,5 +59,21 @@ public class SeckillProductController extends BaseController {
     public R<SeckillProductVo> find(Integer time, Long seckillId) {
         return R.ok(seckillProductService.findFromCache(time, seckillId));
     }
+
+    @RequestMapping("/syncRedisStock" )
+    public R<String> syncRedisStock(Integer time, Long seckillId) {
+        String res = null;
+        try {
+            seckillProductService.syncRedisStock(time, seckillId);
+            res = "success";
+        }catch (Exception e){
+            e.printStackTrace();
+            res = "error";
+
+        }
+        return R.ok(res);
+    }
+
+
 
 }

@@ -93,6 +93,16 @@
             <artifactId>ruoyi-api-rabbit</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-common-rabbitmq</artifactId>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.ruoyi</groupId>-->
+            <!--<artifactId>ruoyi-common-rabbitmq</artifactId>-->
+            <!--<version>3.6.0</version>-->
+            <!--<scope>compile</scope>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>

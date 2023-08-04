@@ -1,5 +1,6 @@
 package com.ruoyi.seckill.mapper;
 
+import com.ruoyi.seckill.api.model.OrderInfo;
 import com.ruoyi.seckill.api.model.SeckillProduct;
 
 import java.util.List;
@@ -43,4 +44,13 @@ public interface SeckillProductMapper {
      * @return
      */
     int getStockCount(Long seckillId);
+
+
+    /**
+     * 查询秒杀商品id
+     *
+     * @param productId 商品id
+     * @return
+     */
+    Long findSeckillId(Long productId);
 }
