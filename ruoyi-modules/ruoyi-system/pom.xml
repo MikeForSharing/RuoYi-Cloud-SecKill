@@ -86,6 +86,17 @@
         </dependency>
 
 
+        <!-- RuoYi Api Rabbit -->
+        <!--<dependency>-->
+            <!--<groupId>com.ruoyi</groupId>-->
+            <!--<artifactId>ruoyi-api-rabbit</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-api-rabbit</artifactId>
+            <version>3.6.0</version>
+            <!--<scope>compile</scope>-->
+        </dependency>
     </dependencies>
 
     <build>

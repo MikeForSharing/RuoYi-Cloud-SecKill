@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.ruoyi.common.security.annotation.EnableCustomConfig;
 import com.ruoyi.common.security.annotation.EnableRyFeignClients;
 import com.ruoyi.common.swagger.annotation.EnableCustomSwagger2;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * 系统模块
@@ -15,6 +16,8 @@ import com.ruoyi.common.swagger.annotation.EnableCustomSwagger2;
 @EnableCustomSwagger2
 @EnableRyFeignClients
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.ruoyi.system.*" , "com.ruoyi.rabbit.api.*"})
+
 public class RuoYiSystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(RuoYiSystemApplication.class, args);
