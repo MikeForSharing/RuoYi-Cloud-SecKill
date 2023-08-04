@@ -15,6 +15,9 @@
         <module>ruoyi-file</module>
         <module>ruoyi-rabbit</module>
         <module>ruoyi-elasticJob</module>
+        <module>ruoyi-seckill</module>
+        <module>ruoyi-websocket</module>
+        <module>ruoyi-rabbit</module>
 
 
     </modules>
