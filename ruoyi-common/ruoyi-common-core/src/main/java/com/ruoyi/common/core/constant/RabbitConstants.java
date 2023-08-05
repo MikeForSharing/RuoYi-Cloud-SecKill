@@ -36,4 +36,14 @@ public class RabbitConstants {
     public static final Integer MESSAGE_DELAYTIME_10 = 1;
     public static final Integer MESSAGE_DELAYTIME_60 = 2;
 
+
+    /**
+     * 订单创建成功
+     */
+    public static final String ORDER_RESULT_SUCCESS_TAG = "SUCCESS";
+
+    /**
+     * 订单创建成失败
+     */
+    public static final String ORDER_RESULT_FAIL_TAG = "FAIL";
 }
