@@ -35,7 +35,8 @@ public class RedisConfig extends CachingConfigurerSupport
 
         // Hash的key也采用StringRedisSerializer的序列化方式
         template.setHashKeySerializer(new StringRedisSerializer());
-        template.setHashValueSerializer(serializer);
+//        template.setHashValueSerializer(serializer);
+        template.setHashValueSerializer(new StringRedisSerializer());
 
         template.afterPropertiesSet();
         return template;

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
@@ -35,10 +33,9 @@ public class RedisService
      */
     public <T> void setCacheObject(final String key, final T value)
     {
+
         redisTemplate.opsForValue().set(key, value);
     }
-
-
 
     /**
      * 缓存基本的对象，Integer、String、实体类等
@@ -201,6 +198,79 @@ public class RedisService
     }
 
     /**
+     * 判断set中是否有key对于的value
+     *
+     * @param key
+     * @return
+     */
+    public boolean isMemberSet(final String key, final String value)
+    {
+        return redisTemplate.opsForSet().isMember(key,value);
+    }
+
+    /**
+     * 向set集合中加入value
+     *
+     * @param key
+     * @return
+     */
+    public long addCacheSet(final String key, final String value)
+    {
+        return redisTemplate.opsForSet().add(key,value);
+    }
+
+
+    /**
+     * 删除set集合中的value
+     *
+     * @param key
+     * @return
+     */
+    public long deleteCacheSet(final String key, final String value)
+    {
+        return redisTemplate.opsForSet().remove(key,value);
+    }
+
+
+    /**
+     * 往ZSet中存入数据
+     *
+     * @param key Redis键
+     * @param value 值
+     * @param score 分值
+     */
+    public Boolean setCacheZSet(final String key, final String value, final double score)
+    {
+        return redisTemplate.opsForZSet().add(key,value,score);
+    }
+
+    /**
+     * 根据分值区间获取数据
+     *
+     * @param key Redis键
+     * @param scoreBeg 起始分值
+     * @param scoreEnd 终止分值
+     *
+     */
+    public <T> Set<String> getRangeByScore(final T key, final double scoreBeg, final double scoreEnd){
+        return redisTemplate.opsForZSet().rangeByScore(key, scoreBeg, scoreEnd);
+    }
+
+
+    /**
+     * 根据分值区间删除数据
+     *
+     * @param key Redis键
+     * @param scoreBeg 起始分值
+     * @param scoreEnd 终止分值
+     *
+     */
+    public <T> boolean removeRangeByScore(final T key, final double scoreBeg, final double scoreEnd){
+        return Boolean.TRUE.equals(redisTemplate.opsForZSet().removeRangeByScore(key, scoreBeg, scoreEnd));
+    }
+
+
+    /**
      * 缓存Map
      *
      * @param key
@@ -214,6 +284,18 @@ public class RedisService
     }
 
     /**
+     * 获得缓存的List
+     *
+     * @param key
+     * @return
+     */
+    public <T> List<T> getCacheHashList(final String key)
+    {
+        return redisTemplate.opsForHash().values(key);
+    }
+
+
+    /**
      * 获得缓存的Map
      *
      * @param key
@@ -223,6 +305,7 @@ public class RedisService
     {
         return redisTemplate.opsForHash().entries(key);
     }
+
 
     /**
      * 往Hash中存入数据
@@ -272,6 +355,31 @@ public class RedisService
     {
         return Boolean.TRUE.equals(redisTemplate.opsForHash().delete(key, hKey));
     }
+
+    /**
+     * 删除Hash中的某条数据
+     *
+     * @param key Redis键
+     * @param hKey  Hash键
+     * @return 是否成功
+     */
+    public boolean deleteCacheMapValue(final String key, final Object... hKey)
+    {
+        return Boolean.TRUE.equals(redisTemplate.opsForHash().delete(key, hKey));
+    }
+
+    /**
+     * Hash中加减value
+     * @param key
+     * @param hKey
+     * @param num
+     * @return
+     */
+    public Long incrementCacheMapValue(final String key, final String hKey, long num)
+    {
+        return redisTemplate.opsForHash().increment(key, hKey, num);
+    }
+
 
     /**
      * 获得缓存的基本对象列表
