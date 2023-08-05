@@ -143,6 +143,12 @@
                 <version>${poi.version}</version>
             </dependency>
 
+
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-amqp</artifactId>-->
+                <!--<version>3.4.1</version>-->
+            <!--</dependency>-->
             <!-- 文件上传工具类 -->
             <dependency>
                 <groupId>commons-fileupload</groupId>
@@ -234,6 +240,13 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <!-- 消息中间件服务 -->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-common-rabbit</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
             <!-- 系统接口 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
@@ -241,14 +254,23 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
-            <!-- 秒杀接口 -->
+            <!-- rabbit远程接口 tmp -->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-api-rabbit</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
+            <!-- 秒杀操作接口 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
                 <artifactId>ruoyi-api-seckill</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 
-            <!-- 秒杀接口 -->
+
+
+            <!-- 秒杀商品接口 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
                 <artifactId>ruoyi-api-product</artifactId>
@@ -259,6 +281,13 @@
             <dependency>
                 <groupId>com.ruoyi</groupId>
                 <artifactId>ruoyi-modules-rabbit</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
+            <!-- rabbitmq公共模块 -->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-common-rabbitmq</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
         </dependencies>
