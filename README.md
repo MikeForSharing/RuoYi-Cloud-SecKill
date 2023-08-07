@@ -17,7 +17,8 @@
 10.  秒杀结果反馈：通过集成websocket建立长连接，及时准确通知用户秒杀结果。
   
 #### 秒杀功能流程图
-![秒杀流程图](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/35acb399-2d30-4ee9-bd28-37c263b477f9)
+![秒杀流程图]([https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/35acb399-2d30-4ee9-bd28-37c263b477f9](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E5%89%8D%E7%AB%AF-%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8%E7%95%8C%E9%9D%A2.png))
+
   
 #### 扩展功能：
   商品秒杀：实现高并发的秒杀校验、秒杀预处理、创建订单、库存回补等功能。  
