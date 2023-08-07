@@ -96,26 +96,26 @@ com.ruoyi
 
 1.  秒杀操作前，数据库秒杀商品表中库存数量为10:
   
-    ![image]()  
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8%E7%95%8C%E9%9D%A2.png)  
 
 2.  机器环境：
      
-    ![image]()  
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E6%9C%BA%E5%99%A8%E7%8E%AF%E5%A2%83.png)  
 
 3.  模拟并发量：
-    ![image]()  
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E6%A8%A1%E6%8B%9F%E5%B9%B6%E5%8F%91%E9%87%8F.png)  
     
 4.  测试结果:
       
-    ![image]()  
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png)  
   
 5.  秒杀操作完成后，数据库秒杀商品表中库存数量为0，没有出现超卖的情况：
      
-    ![image]()  
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E7%A7%92%E6%9D%80%E6%93%8D%E4%BD%9C%E5%AE%8C%E6%88%90%E5%90%8E%E5%BA%93%E5%AD%98%E9%87%8F.png)  
 
 6.  秒杀操作完成后，数据库秒杀订单表中新增订单数量为10：
       
-    ![image]()  
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E7%A7%92%E6%9D%80%E6%93%8D%E4%BD%9C%E5%AE%8C%E6%88%90%E5%90%8E%E6%96%B0%E5%A2%9E%E8%AE%A2%E5%8D%95%E6%95%B0%E9%87%8F.png)  
     
 #### 交流
 若发现bug，请issues，并提供复现路径。  
