@@ -17,7 +17,7 @@
 10.  秒杀结果反馈：通过集成websocket建立长连接，及时准确通知用户秒杀结果。
   
 #### 秒杀功能流程图
-![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E7%A7%92%E6%9D%80%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
+  ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E7%A7%92%E6%9D%80%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
 
   
 #### 扩展功能：
@@ -80,44 +80,42 @@ com.ruoyi
 ├──pom.xml                // 公共依赖
 ~~~
   
-#### 演示
-
+#### 演示  
 商品列表界面：  
   
- ![企业微信截图_16908578775992](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/2652d3b6-b169-4ddb-9300-168c0570bc9c)
+ ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E5%89%8D%E7%AB%AF-%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8%E7%95%8C%E9%9D%A2.png)
    
 商品详情界面：  
   
-![企业微信截图_16908579112877](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/72272ad2-4fb2-4449-8995-2f8f39d94caa)
-  
+ ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E5%89%8D%E7%AB%AF-%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E7%95%8C%E9%9D%A2.png)  
 秒杀结果界面：  
   
-  ![企业微信截图_16908579007626](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/471c0bcc-0020-4871-9222-fd6a18885e1b)
+ ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E5%89%8D%E7%AB%AF-%E7%A7%92%E6%9D%80%E7%BB%93%E6%9E%9C%E7%95%8C%E9%9D%A2.png)  
     
 #### 性能测试
 
 1.  秒杀操作前，数据库秒杀商品表中库存数量为10:
   
-    ![企业微信截图_16908569879684](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/13c6fc0e-cf98-401c-ab9e-36f4c53108ba)  
+    ![image]()  
 
 2.  机器环境：
      
-    ![企业微信截图_16908570211309](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/3d62af54-3321-4231-a57c-ce48a3984c25)  
+    ![image]()  
 
 3.  模拟并发量：
-    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/053986d8-1f28-4f92-8f9a-4885af161f88)
+    ![image]()  
     
 4.  测试结果:
       
-    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/8e299141-88a3-4b85-b337-1d12f0f1f2a0)
+    ![image]()  
   
 5.  秒杀操作完成后，数据库秒杀商品表中库存数量为0，没有出现超卖的情况：
      
-    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/1d7b5960-3d8c-43a7-a71a-191e3101009e)
+    ![image]()  
 
 6.  秒杀操作完成后，数据库秒杀订单表中新增订单数量为10：
       
-    ![企业微信截图_16908571818483](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/cce437a8-1113-45f2-b318-66d751954df0)
+    ![image]()  
     
 #### 交流
 若发现bug，请issues，并提供复现路径。  
