@@ -102,7 +102,7 @@ com.ruoyi
      
     ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E6%9C%BA%E5%99%A8%E7%8E%AF%E5%A2%83.png)  
 
-3.  模拟并发量：
+3.  模拟并发量：  
     ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E6%A8%A1%E6%8B%9F%E5%B9%B6%E5%8F%91%E9%87%8F.png)  
     
 4.  测试结果:
