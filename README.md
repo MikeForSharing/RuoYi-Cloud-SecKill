@@ -2,7 +2,7 @@
 高并发秒杀系统
 
 #### 介绍
-本项目基于若依RuoYi-Cloud的RuoYi-Cloud-SecKill微服务项目，后端采用Spring Boot、Spring Cloud & Alibaba、MyBatis，前端采用Vue+ElementUI，通过创建基于Redis、RabbitMQ、WebSocket、ElasticJob的技术方案，设计实现高并发秒杀系统架构。
+本项目是基于若依RuoYi-Cloud的高并发秒杀微服务项目(RuoYi-Cloud-SecKill)，后端采用Spring Boot、Spring Cloud & Alibaba、MyBatis，前端采用Vue+ElementUI，通过创建基于Redis、RabbitMQ、WebSocket、ElasticJob的技术方案，设计实现高并发秒杀系统架构。
 
 #### 扩展特性
 1.  定时清理用户信息：在Redis中对对登录用户进行排序，删除一星期内未登录用户信息，从而节省内存。
