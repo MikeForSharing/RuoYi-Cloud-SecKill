@@ -106,7 +106,7 @@ com.ruoyi
   
      ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E6%A8%A1%E6%8B%9F%E5%B9%B6%E5%8F%91%E9%87%8F.png)  
     
-5.  测试结果:
+5.  测试结果：  
       
     ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png)  
   
