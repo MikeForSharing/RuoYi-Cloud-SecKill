@@ -8,6 +8,7 @@ import javax.validation.Validator;
 import com.alibaba.fastjson2.JSONObject;
 import com.ruoyi.common.core.constant.SecurityConstants;
 import com.ruoyi.common.core.domain.R;
+import com.ruoyi.common.rabbitmq.server.RabbitmqService;
 import com.ruoyi.common.security.utils.SecurityUtils;
 import com.ruoyi.rabbit.api.RemoteRabbitService;
 import org.slf4j.Logger;
@@ -37,6 +38,8 @@ import com.ruoyi.system.service.ISysUserService;
 
 import static com.ruoyi.common.core.constant.RabbitConstants.EMAIL_CODE_TYPE;
 import static com.ruoyi.common.core.constant.RabbitConstants.MESSAGE_DELAYTIME_10;
+import static com.ruoyi.common.rabbitmq.config.RabbitMQConfiguration.SECKILL_PRE_ORDER_EXCHANGE_NAME;
+import static com.ruoyi.common.rabbitmq.config.RabbitMQConfiguration.SECKILL_PRE_ORDER_QUEUE_ROUTING_KEY;
 
 
 /**
@@ -69,9 +72,11 @@ public class SysUserServiceImpl implements ISysUserService {
     @Autowired
     protected Validator validator;
 
-    @Autowired
-    private RemoteRabbitService remoteRabbitService;
+//    @Autowired
+//    private RemoteRabbitService remoteRabbitService;
 
+    @Autowired
+    private RabbitmqService rabbitmqService;
 
 //    @Autowired
 //    @Resource
@@ -271,7 +276,9 @@ public class SysUserServiceImpl implements ISysUserService {
         // 消息中间件模块处理账户邮件激活事宜
         if (insertRes > 0) {
             // 发送激活账户邮件
-            R<String> activeCode = remoteRabbitService.triggerSendEmail(user, SecurityConstants.INNER);
+//            R<String> activeCode = remoteRabbitService.triggerSendEmail(user, SecurityConstants.INNER);
+            rabbitmqService.rabbitSend(SECKILL_PRE_ORDER_EXCHANGE_NAME,SECKILL_PRE_ORDER_QUEUE_ROUTING_KEY,JSONObject.toJSONString(message));
+
             // 构造消息体
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("type" , EMAIL_CODE_TYPE);

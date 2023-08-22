@@ -78,6 +78,11 @@
             <artifactId>ruoyi-common-swagger</artifactId>
         </dependency>
 
+        <!-- RuoYi Common Rabbit -->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-common-rabbitmq</artifactId>
+        </dependency>
 
         <!-- RuoYi Modules Rabbit-->
         <dependency>
@@ -85,12 +90,6 @@
             <artifactId>ruoyi-modules-rabbit</artifactId>
         </dependency>
 
-
-        <!-- RuoYi Api Rabbit -->
-        <!--<dependency>-->
-            <!--<groupId>com.ruoyi</groupId>-->
-            <!--<artifactId>ruoyi-api-rabbit</artifactId>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-api-rabbit</artifactId>
