@@ -2,7 +2,7 @@
 高并发秒杀系统
 
 #### 介绍
-本项目基于若依RuoYi-Cloud的RuoYi-Cloud-SecKill微服务项目，后端采用Spring Boot、Spring Cloud & Alibaba、MyBatis，前端采用Vue+ElementUI，通过创建基于Redis、RabbitMQ、WebSocket、ElasticJob的技术方案，设计实现高并发秒杀系统架构。
+本项目是基于若依RuoYi-Cloud的高并发秒杀微服务项目(RuoYi-Cloud-SecKill)，后端采用Spring Boot、Spring Cloud & Alibaba、MyBatis，前端采用Vue+ElementUI，通过创建基于Redis、RabbitMQ、WebSocket、ElasticJob的技术方案，设计实现高并发秒杀系统架构。
 
 #### 扩展特性
 1.  定时清理用户信息：在Redis中对对登录用户进行排序，删除一星期内未登录用户信息，从而节省内存。
@@ -17,7 +17,8 @@
 10.  秒杀结果反馈：通过集成websocket建立长连接，及时准确通知用户秒杀结果。
   
 #### 秒杀功能流程图
-![秒杀流程图](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/35acb399-2d30-4ee9-bd28-37c263b477f9)
+  ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E7%A7%92%E6%9D%80%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
+
   
 #### 扩展功能：
   商品秒杀：实现高并发的秒杀校验、秒杀预处理、创建订单、库存回补等功能。  
@@ -79,44 +80,43 @@ com.ruoyi
 ├──pom.xml                // 公共依赖
 ~~~
   
-#### 演示
-
+#### 演示  
 商品列表界面：  
   
- ![企业微信截图_16908578775992](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/2652d3b6-b169-4ddb-9300-168c0570bc9c)
+ ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E5%89%8D%E7%AB%AF-%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8%E7%95%8C%E9%9D%A2.png)
    
 商品详情界面：  
   
-![企业微信截图_16908579112877](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/72272ad2-4fb2-4449-8995-2f8f39d94caa)
-  
+ ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E5%89%8D%E7%AB%AF-%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E7%95%8C%E9%9D%A2.png)  
 秒杀结果界面：  
   
-  ![企业微信截图_16908579007626](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/471c0bcc-0020-4871-9222-fd6a18885e1b)
+ ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E5%89%8D%E7%AB%AF-%E7%A7%92%E6%9D%80%E7%BB%93%E6%9E%9C%E7%95%8C%E9%9D%A2.png)  
     
 #### 性能测试
 
 1.  秒杀操作前，数据库秒杀商品表中库存数量为10:
   
-    ![企业微信截图_16908569879684](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/13c6fc0e-cf98-401c-ab9e-36f4c53108ba)  
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8%E7%95%8C%E9%9D%A2.png)  
 
 2.  机器环境：
      
-    ![企业微信截图_16908570211309](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/3d62af54-3321-4231-a57c-ce48a3984c25)  
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E6%9C%BA%E5%99%A8%E7%8E%AF%E5%A2%83.png)  
 
-3.  模拟并发量：
-    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/053986d8-1f28-4f92-8f9a-4885af161f88)
-    
-4.  测试结果:
-      
-    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/8e299141-88a3-4b85-b337-1d12f0f1f2a0)
+3.  模拟并发量：  
   
-5.  秒杀操作完成后，数据库秒杀商品表中库存数量为0，没有出现超卖的情况：
-     
-    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/1d7b5960-3d8c-43a7-a71a-191e3101009e)
-
-6.  秒杀操作完成后，数据库秒杀订单表中新增订单数量为10：
+     ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E6%A8%A1%E6%8B%9F%E5%B9%B6%E5%8F%91%E9%87%8F.png)  
+    
+5.  测试结果：  
       
-    ![企业微信截图_16908571818483](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/assets/20550776/cce437a8-1113-45f2-b318-66d751954df0)
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png)  
+  
+6.  秒杀操作完成后，数据库秒杀商品表中库存数量为0，没有出现超卖的情况：
+     
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E7%A7%92%E6%9D%80%E6%93%8D%E4%BD%9C%E5%AE%8C%E6%88%90%E5%90%8E%E5%BA%93%E5%AD%98%E9%87%8F.png)  
+
+7.  秒杀操作完成后，数据库秒杀订单表中新增订单数量为10：
+      
+    ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E7%A7%92%E6%9D%80%E6%93%8D%E4%BD%9C%E5%AE%8C%E6%88%90%E5%90%8E%E6%96%B0%E5%A2%9E%E8%AE%A2%E5%8D%95%E6%95%B0%E9%87%8F.png)  
     
 #### 交流
 若发现bug，请issues，并提供复现路径。  
