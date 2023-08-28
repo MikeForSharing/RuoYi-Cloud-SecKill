@@ -76,7 +76,7 @@ public class SeckillOrderResConsumer {
             //消费者在消费消息之前，先去redis中查看消息状态是否已被消费，0：未消费  1：已消费
             //此处取消校验“消息重复消费”功能，因为websocket模块和seckill模块都监听SECKILL_ORDER_RES_FANOUT_EXCHANGE_NAME交换机
 //            if (redisService.setCacheObjectIfAbsent(messageId, RabbitConstants.REDIS_MESSAGE_CONSUME_NO, RabbitConstants.REDIS_MESSAGEID_EXPIRATION, TimeUnit.SECONDS)) {
-                log.info("收到消息：" + new String(message.getBody()));
+                log.info("websocket模块收到消息：" + new String(message.getBody()));
                 // 获取消息
                 String msg = new String(message.getBody());
                 OrderMQResult omqMsg = JSONObject.parseObject(msg, OrderMQResult.class);
@@ -90,6 +90,7 @@ public class SeckillOrderResConsumer {
                     if (session != null) {
                         //可以通过这个uuid获取到客户端对象.
                         session.getBasicRemote().sendText(JSON.toJSONString(omqMsg));
+                        System.out.println("websocket已向客户端发送消息。");
                         return;
                     }
                     count--;
