@@ -36,4 +36,10 @@ public class ServiceNameConstants
      * 商品服务的serviceid
      */
     public static final String PRODUCT_SERVICE = "ruoyi-product";
+
+
+    /**
+     * 阿里支付服务的serviceid
+     */
+    public static final String ALIPAY_SERVICE = "ruoyi-alipay";
 }
