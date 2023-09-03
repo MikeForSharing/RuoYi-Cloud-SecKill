@@ -1,16 +1,19 @@
 package com.ruoyi.seckill.service.imp;
 
+import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.exception.seckill.SeckillException;
+import com.ruoyi.common.core.utils.StringUtils;
 import com.ruoyi.common.core.utils.uuid.IdUtils;
 import com.ruoyi.common.redis.service.RedisService;
-import com.ruoyi.seckill.api.model.OrderInfo;
-import com.ruoyi.seckill.api.model.SeckillProductVo;
+import com.ruoyi.seckill.api.RemoteSeckillAlipayService;
+import com.ruoyi.seckill.api.model.*;
 import com.ruoyi.seckill.enums.SeckillRedisKey;
 import com.ruoyi.seckill.mapper.OrderInfoMapper;
 import com.ruoyi.seckill.mapper.SeckillProductMapper;
 import com.ruoyi.seckill.service.ISeckillOrderService;
 import com.ruoyi.seckill.service.ISeckillProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +37,15 @@ public class SeckillOrderSeviceImpl implements ISeckillOrderService {
     @Autowired
     @Lazy
     private ISeckillProductService seckillProductService;
+
+
+    @Autowired
+    private RemoteSeckillAlipayService remoteSeckillAlipayService;
+
+    @Value("${pay.returnUrl}")
+    private String returlUrl;
+    @Value("${pay.notifyUrl}")
+    private String notifyUrl;
 
     @Override
     public String createOrderInfo(String userId, SeckillProductVo seckillProductVo) {
@@ -73,6 +85,46 @@ public class SeckillOrderSeviceImpl implements ISeckillOrderService {
         String orderSetKey = SeckillRedisKey.SECKILL_ORDER_SET.getRealKey(String.valueOf(vo.getId()));
         redisService.addCacheSet(orderSetKey, userId);
         return orderNo;
+    }
+
+    @Override
+    public OrderInfo selectOrderById(String orderNo) {
+        return orderInfoMapper.find(orderNo);
+    }
+
+    @Override
+    public String alipay(String orderNo) {
+        OrderInfo orderInfo = this.selectOrderById(orderNo);
+        AlipayVo vo = new AlipayVo();
+        vo.setOutTradeNo(orderNo);
+        vo.setSubject(orderInfo.getProductName());
+        vo.setTotalAmount(String.valueOf(orderInfo.getSeckillPrice()));
+        vo.setBody(orderInfo.getProductName());
+        vo.setReturnUrl(returlUrl);
+        vo.setNotifyUrl(notifyUrl);
+        R<String> result = remoteSeckillAlipayService.pay(vo);
+        if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())) {
+            return "支付宝支付失败！";
+        }
+        return result.getData();
+    }
+
+    @Override
+    public void payDone(String orderNo) {
+        OrderInfo orderInfo = this.selectOrderById(orderNo);
+        //插入支付日志
+        PayLogVo log = new PayLogVo();
+        log.setOrderNo(orderNo);
+        log.setPayTime(new Date());
+        log.setTotalAmount(orderInfo.getSeckillPrice().longValue());
+        log.setPayType(OrderInfo.PAYTYPE_ONLINE);
+        payLogMapper.insert(log);
+        //更新订单状态
+        int count = orderInfoMapper.changePayStatus(orderNo, OrderInfo.STATUS_ACCOUNT_PAID, orderInfo.getPayType());
+        if(count==0){
+            //记录日志
+            throw new BusinessException(SeckillCodeMsg.PAY_ERROR);
+        }
     }
 
     @Override

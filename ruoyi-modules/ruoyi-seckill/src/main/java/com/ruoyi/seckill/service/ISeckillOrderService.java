@@ -1,5 +1,6 @@
 package com.ruoyi.seckill.service;
 
+import com.ruoyi.seckill.api.model.OrderInfo;
 import com.ruoyi.seckill.api.model.SeckillProductVo;
 
 /**
@@ -12,4 +13,9 @@ public interface ISeckillOrderService {
 
     String doSeckill(String userId, SeckillProductVo seckillProductVo);
 
+    OrderInfo selectOrderById(String orderNo);
+
+    String alipay(String orderNo);
+
+    void payDone(String orderNo);
 }

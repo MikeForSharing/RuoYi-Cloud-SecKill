@@ -1,28 +1,22 @@
 package com.ruoyi.seckill.controller;
 
-import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.ruoyi.common.core.constant.RabbitConstants;
 import com.ruoyi.common.core.constant.SecurityConstants;
 import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.rabbitmq.server.RabbitmqService;
 import com.ruoyi.common.redis.service.RedisService;
 import com.ruoyi.common.security.utils.SecurityUtils;
-//import com.ruoyi.rabbit.api.RemoteRabbitService;
+import com.ruoyi.seckill.api.model.OrderInfo;
 import com.ruoyi.seckill.api.model.SeckillProductVo;
 import com.ruoyi.seckill.enums.SeckillRedisKey;
 import com.ruoyi.seckill.mq.OrderMessage;
 import com.ruoyi.seckill.service.ISeckillOrderService;
 import com.ruoyi.seckill.service.ISeckillProductService;
-import org.apache.poi.ss.formula.functions.Fixed;
-import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 import static com.ruoyi.common.rabbitmq.config.RabbitMQConfiguration.*;
@@ -89,7 +83,6 @@ public class SeckillOrderController {
         OrderMessage message = new OrderMessage(Integer.parseInt(String.valueOf(time)),seckillId,token,userId);
         System.out.println("message. " + JSONObject.toJSONString(message));
         rabbitmqService.rabbitSend(SECKILL_PRE_ORDER_EXCHANGE_NAME,SECKILL_PRE_ORDER_QUEUE_ROUTING_KEY,JSONObject.toJSONString(message));
-
         //        remoteRabbitService.triggerSend(JSON.toJSONString(message), SecurityConstants.INNER);
 
         return R.ok("进入抢购队列,请等待结果" );
@@ -98,7 +91,7 @@ public class SeckillOrderController {
     /**
      * 取消订单
      *
-     * @param orderNo
+     * @param orderNo 订单编号
      * @return
      */
     @GetMapping("/cancelOrder")
@@ -109,4 +102,25 @@ public class SeckillOrderController {
         }
         return R.ok("取消订单成功");
     }
+
+
+
+
+    /**
+     * 查询订单信息
+     *
+     * @param orderNo 订单编号
+     * @return
+     */
+    @GetMapping("/getOrderInfo")
+    public R<OrderInfo> getOrderInfo(String orderNo) {
+        OrderInfo orderInfo = seckillOrderService.selectOrderById(orderNo);
+        if (orderInfo == null) {
+            return R.fail("获取订单信息失败");
+        }
+        return R.ok(orderInfo);
+    }
+
+
+
 }

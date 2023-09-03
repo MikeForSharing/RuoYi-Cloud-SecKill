@@ -18,8 +18,7 @@
         <module>ruoyi-seckill</module>
         <module>ruoyi-websocket</module>
         <module>ruoyi-rabbit</module>
-
-
+        <module>ruoyi-alipay</module>
     </modules>
 
     <artifactId>ruoyi-modules</artifactId>
