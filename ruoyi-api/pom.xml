@@ -13,6 +13,7 @@
         <module>ruoyi-api-product</module>
         <module>ruoyi-api-seckill</module>
         <module>ruoyi-api-rabbit</module>
+        <module>ruoyi-api-alipay</module>
     </modules>
 
     <artifactId>ruoyi-api</artifactId>
