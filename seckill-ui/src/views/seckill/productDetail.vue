@@ -2,7 +2,7 @@
   <div class="app-container ">
 
     <el-row>
-      <el-col span=7>
+      <el-col span=4>
         <div class="itemDiv">
           <img :src="require ('@/assets/images/seckill'+item.productImg)" alt="" class="moreGood-img">
         </div>
@@ -26,7 +26,7 @@
   import {intoSeckillQueue} from "@/api/seckill/seckillOrder";
 
   export default {
-    name: "Index",
+    name: "productDetail",
     data() {
       return {
         curProductData: {},
@@ -67,10 +67,11 @@
           };
           //获得消息事件
           this.socket.onmessage = function (result) {
+            // debugger
             var data = JSON.parse(result.data);
             if (data.orderNo) {
-              // alert("恭喜你，秒杀成功！");
-              this.$message({message: '喜你，秒杀成功！', type: 'success'})
+              alert("恭喜你，秒杀成功！");
+              // this.$message({message: '喜你，秒杀成功！', type: 'success'})
 
               this.$router.push("/seckill/orderDetail/" + data.orderNo);
             } else {

@@ -23,7 +23,7 @@
               <li class="commodity-data">
                 <div class="commodity-data-flex">
                   <div class="commodityImg">
-                    <!--<img :src="require ('@/assets/images/seckill'+item.productImg)" alt="" class="moreGood-img">-->
+                    <img :src="require ('@/assets/images/seckill'+item.productImg)" alt="" class="moreGood-img">
                   </div>
                   <div class="textParent">
                     <p class="commodity-text">{{item.productName}}</p>
