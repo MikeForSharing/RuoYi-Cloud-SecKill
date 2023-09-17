@@ -240,13 +240,6 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
-            <!-- 消息中间件服务 -->
-            <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common-rabbit</artifactId>
-                <version>${ruoyi.version}</version>
-            </dependency>
-
             <!-- 系统接口 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
@@ -268,7 +261,19 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <!-- alipay支付宝远程接口 -->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-api-alipay</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
 
+            <!-- alipay支付宝接口 -->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-api-alipay</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
 
             <!-- 秒杀商品接口 -->
             <dependency>
