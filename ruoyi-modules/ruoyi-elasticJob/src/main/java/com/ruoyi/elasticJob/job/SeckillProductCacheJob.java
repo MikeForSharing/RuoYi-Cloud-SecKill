@@ -18,6 +18,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 执行定时任务（秒杀商品列表信息保存至Redis）
@@ -53,8 +54,14 @@ public class SeckillProductCacheJob implements SimpleJob {
         redisService.deleteObject(countKey);
         for (SeckillProductVo vo : seckillProductVoList) {
             vo.setCurrentCount(vo.getStockCount());
+            //Redis 事务保持原子性
+            redisService.setMulti();
             redisService.setCacheMapValue(key, String.valueOf(vo.getId()), JSON.toJSONString(vo));
+            redisService.setExpireTime(key,6000*24, TimeUnit.SECONDS);
             redisService.setCacheMapValue(countKey, String.valueOf(vo.getId()), String.valueOf(vo.getStockCount()));
+            redisService.setExpireTime(countKey,6000*24, TimeUnit.SECONDS);
+            redisService.setExec();
+
         }
     }
 }

@@ -6,7 +6,6 @@ import com.ruoyi.common.redis.service.RedisService;
 import com.ruoyi.elasticJob.enums.JobRedisKey;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -25,7 +24,6 @@ import java.util.Set;
 @Getter
 @Setter
 @RefreshScope
-@Slf4j
 public class UserCacheJob implements SimpleJob {
     @Value("${jobCron.userCache}" )
     private String cron;
