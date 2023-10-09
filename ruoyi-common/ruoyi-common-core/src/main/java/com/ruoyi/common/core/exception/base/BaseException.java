@@ -1,5 +1,7 @@
 package com.ruoyi.common.core.exception.base;
 
+import com.ruoyi.common.core.web.domain.CodeMsg;
+
 /**
  * 基础异常
  * 
@@ -28,6 +30,8 @@ public class BaseException extends RuntimeException
      * 错误消息
      */
     private String defaultMessage;
+
+    public BaseException(){}
 
     public BaseException(String module, String code, Object[] args, String defaultMessage)
     {

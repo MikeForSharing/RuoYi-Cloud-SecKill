@@ -42,4 +42,9 @@ public class ServiceNameConstants
      * 阿里支付服务的serviceid
      */
     public static final String ALIPAY_SERVICE = "ruoyi-alipay";
+
+    /**
+     * 积分支付服务的serviceid
+     */
+    public static final String INTERGRAL_SERVICE = "ruoyi-intergral";
 }
