@@ -320,6 +320,42 @@ public class RedisService
     }
 
     /**
+     * 设置Redis中key的过期时间
+     *
+     * @param key Redis键
+     * @return Hash中的对象
+     */
+    public <T> void setExpireTime(final String key,final Integer timeCount, TimeUnit unit)
+    {
+        redisTemplate.expire(key,timeCount,unit);
+    }
+
+    /**
+     * Redis中multi
+     * @return
+     */
+    public void setMulti()
+    {
+        redisTemplate.multi();
+    }
+
+    /**
+     * Redis中exec
+     * @return
+     */
+    public void setExec()
+    {
+        redisTemplate.exec();
+    }
+
+    public <T> T setCacheMapValue(final String key, final String hKey)
+    {
+        HashOperations<String, String, T> opsForHash = redisTemplate.opsForHash();
+        return opsForHash.get(key, hKey);
+    }
+
+
+    /**
      * 获取Hash中的数据
      *
      * @param key Redis键
