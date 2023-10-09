@@ -101,6 +101,18 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-api-alipay</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-api-intergral</artifactId>
+        </dependency>
+
+        <!-- RuoYi Common DataSource -->
+        <dependency>
+        <groupId>com.ruoyi</groupId>
+        <artifactId>ruoyi-common-datasource</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

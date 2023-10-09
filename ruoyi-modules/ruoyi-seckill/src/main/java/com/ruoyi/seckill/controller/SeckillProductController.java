@@ -3,7 +3,6 @@ package com.ruoyi.seckill.controller;
 import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.web.controller.BaseController;
 import com.ruoyi.seckill.api.model.SeckillProductVo;
-import com.ruoyi.seckill.enums.SeckillRedisKey;
 import com.ruoyi.seckill.service.ISeckillProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

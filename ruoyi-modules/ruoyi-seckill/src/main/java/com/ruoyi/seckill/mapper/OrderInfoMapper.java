@@ -34,4 +34,13 @@ public interface OrderInfoMapper {
     int updateCancelStatus(@Param("orderNo" ) String orderNo, @Param("status" ) Integer status);
 
 
+    /**
+     * 更新订单支付状态
+     * @param orderNo
+     * @param status
+     * @param payType
+     * @return
+     */
+    int updatePayStatus(@Param("orderNo") String orderNo, @Param("status") Integer status, @Param("payType") int payType);
+
 }

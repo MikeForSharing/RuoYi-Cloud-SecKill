@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.seckill.mapper.PayLogMapper" >
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+    insert into t_pay_log (order_no,pay_time,total_amount,pay_type)
+            values
+            (#{orderNo},#{payTime},#{totalAmount},#{payType})
+  </insert>
+
+</mapper>

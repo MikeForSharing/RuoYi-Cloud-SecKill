@@ -32,7 +32,7 @@
     </resultMap>
 
     <select id="find" resultMap="OrderInfoResMap">
-        select * from t_order_info where order_no = #{orderNo}
+        select *,TO_DATE('create_date', 'YYYY-MM-DD hh:mm:ss') from t_order_info where order_no = #{orderNo}
     </select>
 
 
@@ -40,6 +40,8 @@
         update t_order_info set status = #{status} where order_no= #{orderNo} and status = 0
     </update>
 
-
+    <update id="updatePayStatus">
+        update t_order_info set status = #{status},pay_date = now(),pay_type=#{payType} where order_no= #{orderNo} and status = 0
+    </update>
 
 </mapper>

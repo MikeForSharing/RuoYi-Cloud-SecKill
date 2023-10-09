@@ -18,4 +18,8 @@ public interface ISeckillOrderService {
     String alipay(String orderNo);
 
     void payDone(String orderNo);
+
+    void intergralPay(String orderNo);
+
+    String alirefund(String orderNo);
 }

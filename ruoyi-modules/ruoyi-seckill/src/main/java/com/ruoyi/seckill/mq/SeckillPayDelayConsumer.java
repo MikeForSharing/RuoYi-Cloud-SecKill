@@ -8,8 +8,6 @@ import com.ruoyi.common.redis.service.RedisService;
 import com.ruoyi.seckill.api.RemoteSeckillOrderService;
 import com.ruoyi.seckill.api.RemoteSeckillProductService;
 import com.ruoyi.seckill.api.model.OrderMQResult;
-import com.ruoyi.seckill.api.model.SeckillCodeMsg;
-import com.ruoyi.seckill.api.model.SeckillProductVo;
 import com.ruoyi.seckill.service.ISeckillOrderService;
 import com.ruoyi.seckill.service.ISeckillProductService;
 import lombok.extern.slf4j.Slf4j;
