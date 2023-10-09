@@ -11,10 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableRyFeignClients
 @SpringBootApplication
 public class RuoyiProductApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(RuoyiProductApplication.class, args);
         System.out.println("启动成功" );
     }
-
 }
