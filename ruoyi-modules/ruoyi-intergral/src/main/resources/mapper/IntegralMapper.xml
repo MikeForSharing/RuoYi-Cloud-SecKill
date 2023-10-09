@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.intergral.mapper.IntegralMapper" >
+
+  <update id="freezeIntergral">
+    update t_usable_integral
+    set
+    freezed_amount = freezed_amount+#{amount},
+    gmt_modified = now()
+    where user_id = #{userId} and amount-freezed_amount > #{amount}
+  </update>
+  <update id="commitChange">
+    update t_usable_integral
+    set
+    amount = amount - #{amount},
+    freezed_amount = freezed_amount-#{amount},
+    gmt_modified = now()
+    where user_id = #{userId}
+  </update>
+  <update id="unFreezeIntergral">
+    update t_usable_integral
+    set
+    freezed_amount = freezed_amount-#{amount},
+    gmt_modified = now()
+    where user_id = #{userId}
+  </update>
+  <update id="incrIntergral">
+    update t_usable_integral
+    set
+    amount = amount + #{amount},
+    gmt_modified = now()
+    where user_id = #{userId}
+  </update>
+  <update id="decrIntergral">
+    update t_usable_integral
+    set
+    amount = amount - #{amount},
+    gmt_modified = now()
+    where user_id = #{userId}
+  </update>
+</mapper>
