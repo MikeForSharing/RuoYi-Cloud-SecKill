@@ -17,7 +17,7 @@
 10.  秒杀结果反馈：通过集成websocket建立长连接，及时准确通知用户秒杀结果。
   
 #### 秒杀功能流程图
-  ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E7%A7%92%E6%9D%80%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
+  ![image](https://github.com/MikeForSharing/RuoYi-Cloud-SecKill/blob/main/systemResPic/%E7%A7%92%E6%9D%80%E6%B5%81%E7%A8%8B%E5%9B%BE.eddx)
 
   
 #### 扩展功能：
